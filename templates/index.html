@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<h1>Weather</h1>
+	<button onclick="updateWeather()">Update</button>
+	<div id="cities"></div>
+
+	<script>
+		async function updateWeather() {
+			const response = await fetch('/update');
+            const cities = await response.json();
+            console.log(cities['Minsk']['weather'])
+            const container = document.getElementById('cities');
+            container.innerHTML = '';
+            for (const [city, data] of Object.entries(cities)) {
+            	container.innerHTML += `<p>${city}: ${data.weather}</p>`;
+			}
+		}
+	</script>
+</body>
+</html>
